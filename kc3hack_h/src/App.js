@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Top from './Top';
+import Weather from './Weather';
+import Traffic from './Traffic';
+import Time from './Time';
+import Schedule from './Schedule';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+function App () {
+
+
+  /* ルーティング */
+    return(
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Top />} />
+          <Route  path="/weather" element={<Weather />} />
+          <Route  path="/traffic" element={<Traffic />} />
+          <Route  path="/time" element={<Time />} />
+          <Route  path="/schedule" element={<Schedule />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  
 }
-
+ 
 export default App;
+
