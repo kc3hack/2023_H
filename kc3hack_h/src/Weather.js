@@ -1,21 +1,15 @@
-import React from 'react';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-
+import React from "react";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
 reportWebVitals();
 
+function Weather() {
+  return (
+    <div>
+      <h1>天気画面</h1>
+    </div>
+  );
+}
 
-function Weather(){
-    
-    return(
-        <>
-        <div>
-          天気画面
-        </div>
-        </>
-      )
-    
-  }
-
-  export default Weather; 
+export default Weather;
