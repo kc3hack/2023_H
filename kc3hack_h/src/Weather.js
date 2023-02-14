@@ -19,7 +19,10 @@ function Weather() {
       <div id="location">
         <h2 id="location-name">{locationName}</h2>
         <div id="location-setting">
-          <button id="location-setting-button" onClick={handleLocationSettingClick}>
+          <button
+            id="location-setting-button"
+            onClick={handleLocationSettingClick}
+          >
             ✐
           </button>
         </div>
