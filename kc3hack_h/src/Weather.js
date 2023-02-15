@@ -4,6 +4,9 @@ import reportWebVitals from "./reportWebVitals";
 
 reportWebVitals();
 
+// TODO: 天気情報の取得
+// TODO: 地域の設定は地域コードを使用するように
+
 function Weather() {
   // 地点の設定
   const [locationName, setLocationName] = useState("地点が設定されていません");
