@@ -12,24 +12,32 @@ function Weather() {
     setLocationName("地点が設定されました");
   }
 
-  // 天気の取得
+  // 天気情報の書き込み
   const [weather, setWeather] = useState(null);
-  function writeWeather() {
-    if (weather === null) {
-      return;
-    }
-    const weatherIcon = document.getElementById("weather-icon");
-    const weatherTemperature = document.getElementById("weather-temperature");
-    const weatherTemperatureDifference = document.getElementById(
-      "weather-temperature-difference"
-    );
-    const weatherDescription = document.getElementById("weather-description");
+  const [weather_icon_url, setWeatherIconUrl] = useState(null);
+  const [weather_temperature, setWeatherTemperature] = useState("-℃");
+  const [weather_temperature_difference, setWeatherTemperatureDifference] = useState("-℃");
+  const [weather_description, setWeatherDescription] = useState("天気情報を取得できていない可能性があります。");
 
-    weatherIcon.innerHTML = weather.weather[0].icon; // 天気アイコン image/weather_icon/ から取得
-    weatherTemperature.innerHTML = weather.main.temp + "℃";
-    weatherTemperatureDifference.innerHTML =
-      weather.main.temp - weather.main.temp_min + "℃";  // 前日との気温差(どこかに前日の気温を保存しておく必要がある)
-    weatherDescription.innerHTML = weather.weather[0].description;
+  function writeWeather() {
+    // 天気情報の取得
+    // const weather_info = getWeatherInfo();
+
+    return (
+      <div id="weather">
+        <div id="weather-icon">
+          <img src={ weather_icon_url } alt="weather-icon" />
+        </div>
+        <div id="weather-temperature">{ weather_temperature }</div>
+
+        {/* 前日との気温差 */}
+        <div id="weather-temperature-difference">{ weather_temperature_difference }</div>
+
+        <div id="weather-description">
+          { weather_description }
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -49,18 +57,7 @@ function Weather() {
       </div>
 
       {/* 天気 */}
-      { writeWeather() }
-      <div id="weather">
-        <div id="weather-icon">
-          <img src="" alt="weather-icon"/>
-        </div>
-        <div id="weather-temperature">-℃</div>
-
-        {/* 前日との気温差 */}
-        <div id="weather-temperature-difference">-℃</div>
-
-        <div id="weather-description">天気情報を取得できていない可能性があります。</div>
-      </div>
+      {writeWeather()}
     </div>
   );
 }
