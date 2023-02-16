@@ -71,7 +71,9 @@ function Weather() {
       .then((weather_info) => {
         setWeather(weather_info[0].timeSeries[0].areas[0].weathers[2]);
         setWeatherId(weather_info[0].timeSeries[0].areas[0].weatherCodes[0]);
-        setWeatherIconUrl("https://www.jma.go.jp/bosai/forecast/img/" + weatherCodes[weather_id][0]);
+        if (weather_id !== "") {
+          setWeatherIconUrl("https://www.jma.go.jp/bosai/forecast/img/" + weatherCodes[weather_id][0]);
+        }
         setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
         setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
       });
