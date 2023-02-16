@@ -27,30 +27,44 @@ function Weather() {
   // 天気情報の書き込み
   const [weather, setWeather] = useState(null);
   const [weather_icon_url, setWeatherIconUrl] = useState(null);
-  const [weather_temperature, setWeatherTemperature] = useState("-℃");
-  const [weather_temperature_difference, setWeatherTemperatureDifference] =
-    useState("-℃");
+  const [weather_temperature_max, setWeatherTemperatureMax] = useState("-℃");
+  const [weather_temperature_min, setWeatherTemperatureMin] = useState("-℃");
   const [weather_description, setWeatherDescription] = useState(
     "天気情報を取得できていない可能性があります。"
   );
 
   function writeWeather() {
     // 天気情報の取得
-    // const weather_info = getWeatherInfo();
+    // TODO: urlを動的に変更 地域コードを使用
+    let weather_api_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/";
+    const area_code = "130000";
+
+    fetch(weather_api_url + area_code + ".json")
+      .then((response) => response.json())
+      .then((weather_info) => {
+        setWeather(weather_info[0].timeSeries[0].areas[0].weathers[2]);
+        setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
+        setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
+      });
+
+    weather_api_url =
+      "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/";
+
+    fetch(weather_api_url + area_code + ".json")
+      .then((response) => response.json())
+      .then((weather_description) => {
+        setWeatherDescription(weather_description["text"])
+      });
 
     return (
       <div id="weather">
         <div id="weather-icon">
           <img src={weather_icon_url} alt="weather-icon" />
         </div>
-        <div id="weather-temperature">{weather_temperature}</div>
+        <div id="weather-temperature-max">最高気温：{weather_temperature_max}</div>
+        <div id="weather-temperature-min">最低気温：{weather_temperature_min}</div>
 
-        {/* 前日との気温差 */}
-        <div id="weather-temperature-difference">
-          {weather_temperature_difference}
-        </div>
-
-        <div id="weather-description">{weather_description}</div>
+        <div id="weather-description">詳細情報：{weather_description}</div>
       </div>
     );
   }
