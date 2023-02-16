@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import weatherCodes from "./weatherCodes.json";
 
 reportWebVitals();
 
@@ -26,6 +27,7 @@ function Weather() {
 
   // 天気情報の書き込み
   const [weather, setWeather] = useState(null);
+  const [weather_id, setWeatherId] = useState(null);
   const [weather_icon_url, setWeatherIconUrl] = useState(null);
   const [weather_temperature_max, setWeatherTemperatureMax] = useState("-℃");
   const [weather_temperature_min, setWeatherTemperatureMin] = useState("-℃");
@@ -43,6 +45,8 @@ function Weather() {
       .then((response) => response.json())
       .then((weather_info) => {
         setWeather(weather_info[0].timeSeries[0].areas[0].weathers[2]);
+        setWeatherId(weather_info[0].timeSeries[0].areas[0].weatherCodes[0]);
+        setWeatherIconUrl("https://www.jma.go.jp/bosai/forecast/img/" + weatherCodes[weather_id][0]);
         setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
         setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
       });
