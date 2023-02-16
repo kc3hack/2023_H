@@ -51,9 +51,9 @@ function Weather() {
   }
 
   // 天気情報の書き込み
-  const [weather, setWeather] = useState(null);
-  const [weather_id, setWeatherId] = useState(null);
-  const [weather_icon_url, setWeatherIconUrl] = useState(null);
+  const [weather, setWeather] = useState("");
+  const [weather_id, setWeatherId] = useState("");
+  const [weather_icon_url, setWeatherIconUrl] = useState("");
   const [weather_temperature_max, setWeatherTemperatureMax] = useState("-℃");
   const [weather_temperature_min, setWeatherTemperatureMin] = useState("-℃");
   const [weather_description, setWeatherDescription] = useState(
