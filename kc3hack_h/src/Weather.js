@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import weatherCodes from "./weatherCodes.json";
+import LocationCodes from "./location.json";
+import "./weather.css";
 
 reportWebVitals();
 
@@ -16,11 +18,36 @@ function Weather() {
       document.getElementById("location-name").textContent = saved_location_name;
     }
   }, []);
+  
+  const dialog = document.getElementById("location-setting-dialog");
 
   function handleLocationSettingClick() {
-    alert("地点を設定します");
-    document.getElementById("location-name").textContent = "地域を設定しました";
-    localStorage.setItem('LocationName', document.getElementById("location-name").textContent);
+    dialog.showModal();
+  }
+
+  function handleLocationSettingCloseClick() {
+    let select = document.getElementById("location-select");
+    let selected_option = select.options[select.selectedIndex];
+    let selected_value = selected_option.value;
+    document.getElementById("location-name").textContent = selected_value;
+    localStorage.setItem(
+      "LocationName",
+      document.getElementById("location-name").textContent
+    );
+    dialog.close();
+  }
+
+  function writeLocationSelection() {
+    let select_options = [];
+    for (let index = 0; index < LocationCodes.length; index++) {
+      select_options.push(
+        <option value={LocationCodes[index].name}>
+          {LocationCodes[index].name}
+        </option>
+      );
+    }
+
+    return select_options;
   }
 
   // 天気情報の書き込み
@@ -78,6 +105,13 @@ function Weather() {
       <div id="location">
         <h2 id="location-name">地域が設定されていません</h2>
         <div id="location-setting">
+          <dialog id="location-setting-dialog">
+            <p>地域を設定</p>
+            <select id="location-select">
+              {writeLocationSelection()}
+            </select>
+            <button onClick={handleLocationSettingCloseClick}>閉じる</button>
+          </dialog>
           <button
             id="location-setting-button"
             onClick={handleLocationSettingClick}
