@@ -7,7 +7,6 @@ import "./weather.css";
 
 reportWebVitals();
 
-// TODO: 天気情報の取得
 // TODO: 地域の設定は地域コードを使用するように
 
 function Weather() {
@@ -71,10 +70,9 @@ function Weather() {
 
   function writeWeather() {
     // 天気情報の取得
-    // TODO: urlを動的に変更 地域コードを使用
     let weather_api_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/";
     let area_code = "000000";
-    
+
     if (localStorage.getItem("LocationName") !== null) {
       area_code = nameToCodeFromLocation(localStorage.getItem("LocationName"));
     }
