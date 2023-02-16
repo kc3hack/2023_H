@@ -10,19 +10,17 @@ reportWebVitals();
 
 function Weather() {
   // 地点の設定
-  const [locationName, setLocationName] = useState("地点が設定されていません");
-
   useEffect(() => {
-    const saved_location_name = localStorage.getItem("location_name");
+    const saved_location_name = localStorage.getItem('LocationName');
     if (saved_location_name) {
-      setLocationName(saved_location_name);
+      document.getElementById("location-name").textContent = saved_location_name;
     }
   }, []);
 
   function handleLocationSettingClick() {
     alert("地点を設定します");
-    setLocationName("地点が設定されました");
-    localStorage.setItem("location_name", locationName);
+    document.getElementById("location-name").textContent = "地域を設定しました";
+    localStorage.setItem('LocationName', document.getElementById("location-name").textContent);
   }
 
   // 天気情報の書き込み
@@ -78,7 +76,7 @@ function Weather() {
       <h1>天気画面</h1>
 
       <div id="location">
-        <h2 id="location-name">{locationName}</h2>
+        <h2 id="location-name">地域が設定されていません</h2>
         <div id="location-setting">
           <button
             id="location-setting-button"
