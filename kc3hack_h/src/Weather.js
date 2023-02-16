@@ -13,12 +13,13 @@ reportWebVitals();
 function Weather() {
   // 地点の設定
   useEffect(() => {
-    const saved_location_name = localStorage.getItem('LocationName');
+    const saved_location_name = localStorage.getItem("LocationName");
     if (saved_location_name) {
-      document.getElementById("location-name").textContent = saved_location_name;
+      document.getElementById("location-name").textContent =
+        saved_location_name;
     }
   }, []);
-  
+
   const dialog = document.getElementById("location-setting-dialog");
 
   function handleLocationSettingClick() {
@@ -72,7 +73,10 @@ function Weather() {
         setWeather(weather_info[0].timeSeries[0].areas[0].weathers[2]);
         setWeatherId(weather_info[0].timeSeries[0].areas[0].weatherCodes[0]);
         if (weather_id !== "") {
-          setWeatherIconUrl("https://www.jma.go.jp/bosai/forecast/img/" + weatherCodes[weather_id][0]);
+          setWeatherIconUrl(
+            "https://www.jma.go.jp/bosai/forecast/img/" +
+              weatherCodes[weather_id][0]
+          );
         }
         setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
         setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
@@ -84,7 +88,7 @@ function Weather() {
     fetch(weather_api_url + area_code + ".json")
       .then((response) => response.json())
       .then((weather_description) => {
-        setWeatherDescription(weather_description["text"])
+        setWeatherDescription(weather_description["text"]);
       });
 
     return (
@@ -92,8 +96,12 @@ function Weather() {
         <div id="weather-icon">
           <img src={weather_icon_url} alt="weather-icon" />
         </div>
-        <div id="weather-temperature-max">最高気温：{weather_temperature_max}</div>
-        <div id="weather-temperature-min">最低気温：{weather_temperature_min}</div>
+        <div id="weather-temperature-max">
+          最高気温：{weather_temperature_max}
+        </div>
+        <div id="weather-temperature-min">
+          最低気温：{weather_temperature_min}
+        </div>
 
         <div id="weather-description">詳細情報：{weather_description}</div>
       </div>
@@ -109,9 +117,7 @@ function Weather() {
         <div id="location-setting">
           <dialog id="location-setting-dialog">
             <p>地域を設定</p>
-            <select id="location-select">
-              {writeLocationSelection()}
-            </select>
+            <select id="location-select">{writeLocationSelection()}</select>
             <button onClick={handleLocationSettingCloseClick}>閉じる</button>
           </dialog>
           <button
