@@ -10,23 +10,24 @@ import Schedule from './Schedule';
 
 
 
-function App () {
+function App() {
 
 
   /* ルーティング */
-    return(
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Top />} />
-          <Route  path="/weather" element={<Weather />} />
-          <Route  path="/traffic" element={<Traffic />} />
-          <Route  path="/time" element={<Time />} />
-          <Route  path="/schedule" element={<Schedule />} />
-        </Routes>
-      </BrowserRouter>
-    );
-  
+  return (
+
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Top />} />
+        <Route path="/weather" element={<Weather />} />
+        <Route path="/traffic" element={<Traffic />} />
+        <Route path="/time" element={<Time />} />
+        <Route path="/schedule" element={<Schedule />} />
+      </Routes>
+    </BrowserRouter>
+  );
+
 }
- 
+
 export default App;
 

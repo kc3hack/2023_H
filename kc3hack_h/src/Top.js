@@ -6,16 +6,16 @@ import reportWebVitals from './reportWebVitals';
 reportWebVitals();
 
 
-function Top(){
-    
-      return(
-          <>
-          <div>
-            トップ画面
-          </div>
-          </>
-        )
-    
-  }
+function Top() {
 
-  export default Top; 
+  return (
+    <>
+      <div>
+        トップ画面
+      </div>
+    </>
+  )
+
+}
+
+export default Top; 
