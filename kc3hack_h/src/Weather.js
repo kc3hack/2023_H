@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import weatherCodes from "./weatherCodes.json";
@@ -61,11 +61,23 @@ function Weather() {
     "天気情報を取得できていない可能性があります。"
   );
 
+  function nameToCodeFromLocation(params) {
+    for (let index = 0; index < LocationCodes.length; index++) {
+      if (LocationCodes[index].name === params) {
+        return LocationCodes[index].code;
+      }
+    }
+  }
+
   function writeWeather() {
     // 天気情報の取得
     // TODO: urlを動的に変更 地域コードを使用
     let weather_api_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/";
-    const area_code = "130000";
+    let area_code = "000000";
+    
+    if (localStorage.getItem("LocationName") !== null) {
+      area_code = nameToCodeFromLocation(localStorage.getItem("LocationName"));
+    }
 
     fetch(weather_api_url + area_code + ".json")
       .then((response) => response.json())
