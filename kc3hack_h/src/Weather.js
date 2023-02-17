@@ -10,7 +10,7 @@ reportWebVitals();
 // TODO: 地域の設定は地域コードを使用するように
 
 function Weather() {
-  const dialog = document.getElementById("location-setting-dialog");
+  let dialog = document.getElementById("location-setting-dialog");
   const [weather, setWeather] = useState("");
   const [weather_id, setWeatherId] = useState("");
   const [weather_icon_url, setWeatherIconUrl] = useState("");
@@ -32,6 +32,7 @@ function Weather() {
 
   // 地点の設定/ダイアログの表示ボタンを押された際に処理される関数
   function handleLocationSettingClick() {
+    dialog = document.getElementById("location-setting-dialog");
     dialog.showModal();
   }
 
@@ -46,6 +47,7 @@ function Weather() {
       document.getElementById("location-name").textContent
     );
     dialog.close();
+    window.location.reload();
   }
 
   function writeLocationSelection() {
@@ -77,6 +79,7 @@ function Weather() {
         return LocationCodes[index].code;
       }
     }
+    return "000000";
   }
 
   // 天気情報の書き込み(変数に値を代入しHTMLで出力)
@@ -113,6 +116,12 @@ function Weather() {
         .then((weather_description) => {
           setWeatherDescription(weather_description["text"]);
         });
+    } else {
+      return(
+        <div>
+          <p>地域が設定されていませされていません。</p>
+        </div>
+      );
     }
 
     return (
