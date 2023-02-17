@@ -20,6 +20,7 @@ function Weather() {
   }, []);
 
   const dialog = document.getElementById("location-setting-dialog");
+  const test_dialog = useRef < HTMLDialogElement > null;
 
   function handleLocationSettingClick() {
     dialog.showModal();
@@ -85,29 +86,31 @@ function Weather() {
       area_code = nameToCodeFromLocation(localStorage.getItem("LocationName"));
     }
 
-    fetch(weather_api_url + area_code + ".json")
-      .then((response) => response.json())
-      .then((weather_info) => {
-        setWeather(weather_info[0].timeSeries[0].areas[0].weathers[2]);
-        setWeatherId(weather_info[0].timeSeries[0].areas[0].weatherCodes[0]);
-        if (weather_id !== "") {
-          setWeatherIconUrl(
-            "https://www.jma.go.jp/bosai/forecast/img/" +
-              weatherCodes[weather_id][0]
-          );
-        }
-        setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
-        setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
-      });
+    if (area_code !== "000000") {
+      fetch(weather_api_url + area_code + ".json")
+        .then((response) => response.json())
+        .then((weather_info) => {
+          setWeather(weather_info[0].timeSeries[0].areas[0].weathers[2]);
+          setWeatherId(weather_info[0].timeSeries[0].areas[0].weatherCodes[0]);
+          if (weather_id !== "") {
+            setWeatherIconUrl(
+              "https://www.jma.go.jp/bosai/forecast/img/" +
+                weatherCodes[weather_id][0]
+            );
+          }
+          setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
+          setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
+        });
 
-    weather_api_url =
-      "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/";
+      weather_api_url =
+        "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/";
 
-    fetch(weather_api_url + area_code + ".json")
-      .then((response) => response.json())
-      .then((weather_description) => {
-        setWeatherDescription(weather_description["text"]);
-      });
+      fetch(weather_api_url + area_code + ".json")
+        .then((response) => response.json())
+        .then((weather_description) => {
+          setWeatherDescription(weather_description["text"]);
+        });
+    }
 
     return (
       <div id="weather">
