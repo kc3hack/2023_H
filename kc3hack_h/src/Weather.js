@@ -40,11 +40,19 @@ function Weather() {
   function writeLocationSelection() {
     let select_options = [];
     for (let index = 0; index < LocationCodes.length; index++) {
-      select_options.push(
-        <option value={LocationCodes[index].name}>
-          {LocationCodes[index].name}
-        </option>
-      );
+      if (LocationCodes[index].name === localStorage.getItem("LocationName")) {
+        select_options.push(
+          <option value={LocationCodes[index].name} selected>
+            {LocationCodes[index].name}
+          </option>
+        );
+      } else {
+        select_options.push(
+          <option value={LocationCodes[index].name}>
+            {LocationCodes[index].name}
+          </option>
+        );
+      }
     }
 
     return select_options;
