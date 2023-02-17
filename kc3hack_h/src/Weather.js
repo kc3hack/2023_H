@@ -20,7 +20,6 @@ function Weather() {
   }, []);
 
   const dialog = document.getElementById("location-setting-dialog");
-  const test_dialog = useRef < HTMLDialogElement > null;
 
   function handleLocationSettingClick() {
     dialog.showModal();
