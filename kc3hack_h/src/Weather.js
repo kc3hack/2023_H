@@ -4,6 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 import weatherCodes from "./weatherCodes.json";
 import LocationCodes from "./location.json";
 import "./weather.css";
+import { Button } from "@mui/material";
 
 reportWebVitals();
 
@@ -151,14 +152,21 @@ function Weather() {
           <dialog id="location-setting-dialog">
             <p>地域を設定</p>
             <select id="location-select">{writeLocationSelection()}</select>
-            <button onClick={handleLocationSettingCloseClick}>閉じる</button>
+            <Button
+              onClick={handleLocationSettingCloseClick}
+              variant="contained"
+              
+            >
+              閉じる
+            </Button>
           </dialog>
-          <button
+          <Button
             id="location-setting-button"
             onClick={handleLocationSettingClick}
+            variant="outlined"
           >
             ✐
-          </button>
+          </Button>
         </div>
       </div>
 
