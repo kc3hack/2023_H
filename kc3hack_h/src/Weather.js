@@ -10,7 +10,18 @@ reportWebVitals();
 // TODO: 地域の設定は地域コードを使用するように
 
 function Weather() {
-  // 地点の設定
+  const dialog = document.getElementById("location-setting-dialog");
+  const [weather, setWeather] = useState("");
+  const [weather_id, setWeatherId] = useState("");
+  const [weather_icon_url, setWeatherIconUrl] = useState("");
+  const [weather_temperature_max, setWeatherTemperatureMax] = useState("-℃");
+  const [weather_temperature_min, setWeatherTemperatureMin] = useState("-℃");
+  const [weather_description, setWeatherDescription] = useState(
+    "天気情報を取得できていない可能性があります。"
+  );
+
+  // ここから地点の設定
+  // ローカルストレージに保存されている地点名を取得しある場合は表示
   useEffect(() => {
     const saved_location_name = localStorage.getItem("LocationName");
     if (saved_location_name) {
@@ -19,12 +30,12 @@ function Weather() {
     }
   }, []);
 
-  const dialog = document.getElementById("location-setting-dialog");
-
+  // 地点の設定/ダイアログの表示ボタンを押された際に処理される関数
   function handleLocationSettingClick() {
     dialog.showModal();
   }
 
+  // 地点の設定/ダイアログの閉じるボタンを押された際に処理される関数
   function handleLocationSettingCloseClick() {
     let select = document.getElementById("location-select");
     let selected_option = select.options[select.selectedIndex];
@@ -58,16 +69,8 @@ function Weather() {
     return select_options;
   }
 
-  // 天気情報の書き込み
-  const [weather, setWeather] = useState("");
-  const [weather_id, setWeatherId] = useState("");
-  const [weather_icon_url, setWeatherIconUrl] = useState("");
-  const [weather_temperature_max, setWeatherTemperatureMax] = useState("-℃");
-  const [weather_temperature_min, setWeatherTemperatureMin] = useState("-℃");
-  const [weather_description, setWeatherDescription] = useState(
-    "天気情報を取得できていない可能性があります。"
-  );
-
+  // ここから天気情報の書き込み
+  // 地点名から地点コードを取得する関数
   function nameToCodeFromLocation(params) {
     for (let index = 0; index < LocationCodes.length; index++) {
       if (LocationCodes[index].name === params) {
@@ -76,6 +79,7 @@ function Weather() {
     }
   }
 
+  // 天気情報の書き込み(変数に値を代入しHTMLで出力)
   function writeWeather() {
     // 天気情報の取得
     let weather_api_url = "https://www.jma.go.jp/bosai/forecast/data/forecast/";
