@@ -14,7 +14,6 @@ function Top() {
   return (
     <>
       <div>
-        トップ画面
         <Weather />
         <Grid
           container
