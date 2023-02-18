@@ -4,7 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 import Weather from "./Weather";
 import ScheduleTime from "./ScheduleTime";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 reportWebVitals();
 
@@ -16,26 +16,35 @@ function Top() {
       <div>
         トップ画面
         <Weather />
-        <Button
-          className="trafficButton"
-          onClick={() => {
-            navigate("/traffic");
-          }}
-          variant="outlined"
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
         >
-          遅延情報
-        </Button>
-        <br />
-        <Button
-          className="scheduleButton"
-          onClick={() => {
-            navigate("/schedule");
-          }}
-          variant="outlined"
-        >
-          予定情報
-        </Button>
-        {/*<Schedule calendarID={calendarID} APIkey={APIkey}/>*/}
+          <Button
+            className="trafficButton"
+            onClick={() => {
+              navigate("/traffic");
+            }}
+            variant="outlined"
+            size="large"
+          >
+            遅延情報
+          </Button>
+          <br />
+          <Button
+            className="scheduleButton"
+            onClick={() => {
+              navigate("/schedule");
+            }}
+            variant="outlined"
+            size="large"
+          >
+            予定情報
+          </Button>
+          {/*<Schedule calendarID={calendarID} APIkey={APIkey}/>*/}
+        </Grid>
         <ScheduleTime />
       </div>
     </>
