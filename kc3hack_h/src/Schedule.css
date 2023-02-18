@@ -2,7 +2,7 @@
     font-family: "UD デジタル 教科書体 NP-B", "メイリオ";
 } */
 
-.background {
+.background_Schedule {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -12,7 +12,7 @@
     z-index: -1000;
 }
 
-.Running {
+.Running_Schedule {
     position: absolute;
     left: 10px;
     top: 80px;
@@ -30,7 +30,7 @@
     z-index: -1;
 }
 
-.button0 {
+.button_Schedule0 {
     position: absolute;
     left: 140px;
     top: 60px;
@@ -39,7 +39,7 @@
 
 }
 
-.button1 {
+.button_Schedule1 {
     position: absolute;
     left: 220px;
     top: 139px;
@@ -47,7 +47,7 @@
     background-color: transparent;
 }
 
-.button2 {
+.button_Schedule2 {
     position: absolute;
     left: 320px;
     top: 40px;
@@ -55,7 +55,7 @@
     background-color: transparent;
 }
 
-.button3 {
+.button_Schedule3 {
     position: absolute;
     left: 380px;
     top: 135px;
@@ -63,7 +63,7 @@
     background-color: transparent;
 }
 
-.event0 {
+.event_Schedule0 {
     position: absolute;
     left: -20px;
     top: -28px;
@@ -72,7 +72,7 @@
     z-index: -100;
 }
 
-.event1 {
+.event_Schedule1 {
     position: absolute;
     left: -20px;
     top: -26px;
@@ -81,7 +81,7 @@
     z-index: -100;
 }
 
-.event2 {
+.event_Schedule2 {
     position: absolute;
     left: -15px;
     top: -27px;
@@ -90,7 +90,7 @@
     z-index: -100;
 }
 
-.event3 {
+.event_Schedule3 {
     position: absolute;
     left: -12px;
     top: -30px;

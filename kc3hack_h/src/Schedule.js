@@ -61,8 +61,8 @@ function Icon({ simpevents, eventID }) {
   return (
     <span className="icon-container">
 
-      <button className={"button" + eventID} onClick={handleIconClick}>
-        <img src={Event[eventID]} alt="Event" className={"event" + eventID} />
+      <button className={"button_Schedule" + eventID} onClick={handleIconClick}>
+        <img src={Event[eventID]} alt="Event" className={"event_Schedule" + eventID} />
         {simpevents.summary}
       </button>
       {showDetails && (
@@ -127,11 +127,13 @@ class Schedule extends React.Component {
   render() {
     console.log(this.state.simpevents);
     return (
-      <div className="container">
-        <img src={Background1} alt="Background1" className="background" />
-        <img src={Running} alt="Running" className="Running" />
-        <EventButtons simpevents={this.state.simpevents} />
-      </div>
+      <>
+         <div className="container_Schedule" style={{ position: "relative" }}>
+           <img src={Background1} alt="Background1" className="background_Schedule" />
+           <img src={Running} alt="Running" className="Running_Schedule" />
+           <EventButtons simpevents={this.state.simpevents} />
+         </div>
+       </>
     );
   }
 }
