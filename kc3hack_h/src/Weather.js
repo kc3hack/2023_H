@@ -62,26 +62,6 @@ function Weather() {
     }
   }, []);
 
-  // 地点の設定/ダイアログの表示ボタンを押された際に処理される関数
-  function handleLocationSettingClick() {
-    dialog = document.getElementById("location-setting-dialog");
-    dialog.showModal();
-  }
-
-  // 地点の設定/ダイアログの閉じるボタンを押された際に処理される関数
-  function handleLocationSettingCloseClick() {
-    let select = document.getElementById("location-select");
-    let selected_option = select.options[select.selectedIndex];
-    let selected_value = selected_option.value;
-    document.getElementById("location-name").textContent = selected_value;
-    localStorage.setItem(
-      "LocationName",
-      document.getElementById("location-name").textContent
-    );
-    dialog.close();
-    window.location.reload();
-  }
-
   function writeLocationSelection() {
     let select_options = [];
     for (let index = 0; index < LocationCodes.length; index++) {
@@ -179,8 +159,10 @@ function Weather() {
 
       <div id="location">
         <Grid container>
-          <Grid item xs={3}>
-            <Typography id="location-name" variant="h4">地域が設定されていません</Typography>
+          <Grid item xs={5}>
+            <Typography id="location-name" variant="h4">
+              地域が設定されていません
+            </Typography>
           </Grid>
           <Grid item xs={2}>
             <div id="location-setting">
