@@ -3,15 +3,26 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import weatherCodes from "./weatherCodes.json";
 import LocationCodes from "./location.json";
-import "./weather.css";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Box,
+} from "@mui/material";
 
 reportWebVitals();
 
 // TODO: 地域の設定は地域コードを使用するように
 
 function Weather() {
-  let dialog = document.getElementById("location-setting-dialog");
   const [weather, setWeather] = useState("");
   const [weather_id, setWeatherId] = useState("");
   const [weather_icon_url, setWeatherIconUrl] = useState("");
@@ -20,6 +31,29 @@ function Weather() {
   const [weather_description, setWeatherDescription] = useState(
     "天気情報を取得できていない可能性があります。"
   );
+  const [dialog_open, setDialogOpen] = useState(false);
+
+  // Dialogの表示
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  // Dialogの非表示
+  const handleDialogClose = () => {
+    let select = document.getElementById("location-select");
+    let selected_option = select.options[select.selectedIndex];
+    let selected_value = selected_option.value;
+    document.getElementById("location-name").textContent = selected_value;
+    localStorage.setItem(
+      "LocationName",
+      document.getElementById("location-name").textContent
+    );
+    window.location.reload();
+    setDialogOpen(false);
+  };
+  const handleDialogCancelClose = () => {
+    setDialogOpen(false);
+  };
 
   // ここから地点の設定
   // ローカルストレージに保存されている地点名を取得しある場合は表示
@@ -30,26 +64,6 @@ function Weather() {
         saved_location_name;
     }
   }, []);
-
-  // 地点の設定/ダイアログの表示ボタンを押された際に処理される関数
-  function handleLocationSettingClick() {
-    dialog = document.getElementById("location-setting-dialog");
-    dialog.showModal();
-  }
-
-  // 地点の設定/ダイアログの閉じるボタンを押された際に処理される関数
-  function handleLocationSettingCloseClick() {
-    let select = document.getElementById("location-select");
-    let selected_option = select.options[select.selectedIndex];
-    let selected_value = selected_option.value;
-    document.getElementById("location-name").textContent = selected_value;
-    localStorage.setItem(
-      "LocationName",
-      document.getElementById("location-name").textContent
-    );
-    dialog.close();
-    window.location.reload();
-  }
 
   function writeLocationSelection() {
     let select_options = [];
@@ -91,6 +105,12 @@ function Weather() {
 
     if (localStorage.getItem("LocationName") !== null) {
       area_code = nameToCodeFromLocation(localStorage.getItem("LocationName"));
+    } else {
+      return (
+        <Typography variant="h5">
+          地域が設定されていません。設定を行ってください。
+        </Typography>
+      );
     }
 
     if (area_code !== "000000") {
@@ -105,8 +125,12 @@ function Weather() {
                 weatherCodes[weather_id][0]
             );
           }
-          setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
-          setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
+          setWeatherTemperatureMax(
+            weather_info[1].tempAverage.areas[0].max + "℃"
+          );
+          setWeatherTemperatureMin(
+            weather_info[1].tempAverage.areas[0].min + "℃"
+          );
         });
 
       weather_api_url =
@@ -118,61 +142,110 @@ function Weather() {
           setWeatherDescription(weather_description["text"]);
         });
     } else {
-      return(
+      return (
         <div>
-          <p>地域が設定されていません。</p>
+          <Typography variant="h4">地域が設定されていません</Typography>
         </div>
       );
     }
 
     return (
       <div id="weather">
-        <div id="weather-icon">
-          <img src={weather_icon_url} alt="weather-icon" />
-        </div>
-        <div id="weather-temperature-max">
-          最高気温：{weather_temperature_max}
-        </div>
-        <div id="weather-temperature-min">
-          最低気温：{weather_temperature_min}
-        </div>
-
-        <div id="weather-description">詳細情報：{weather_description}</div>
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+        >
+          <Card sx={{ maxWidth: 500 }}>
+            <CardMedia
+              sx={{ height: 300 }}
+              image={weather_icon_url}
+              title="weather-icon"
+            />
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                fontWeight="bold"
+                align="center"
+              >
+                {weather}
+              </Typography>
+              <Box fontWeight="fontWeightMedium">
+                <Typography style={{ color: "#ba000d" }}>
+                  最高気温：{weather_temperature_max}
+                  <br></br>
+                </Typography>
+                <Typography color="primary">
+                  最低気温：{weather_temperature_min}
+                </Typography>
+              </Box>
+              <Typography variant="body2" color="text.secondary">
+                詳細情報：{weather_description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>天気画面</h1>
-
-      <div id="location">
-        <h2 id="location-name">地域が設定されていません</h2>
-        <div id="location-setting">
-          <dialog id="location-setting-dialog">
-            <p>地域を設定</p>
-            <select id="location-select">{writeLocationSelection()}</select>
-            <Button
-              onClick={handleLocationSettingCloseClick}
-              variant="contained"
-              
-            >
-              閉じる
-            </Button>
-          </dialog>
-          <Button
-            id="location-setting-button"
-            onClick={handleLocationSettingClick}
-            variant="outlined"
-          >
-            ✐
-          </Button>
+    <div id="feature-weather">
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+      >
+        <div id="location">
+          <Grid container>
+            <Grid item xs={10}>
+              <Typography id="location-name" variant="h4"></Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <div id="location-setting">
+                <Button variant="outlined" onClick={handleDialogOpen}>
+                  ✐
+                </Button>
+                <Dialog
+                  open={dialog_open}
+                  onClose={handleDialogClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"地域の設定"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      <select id="location-select">
+                        {writeLocationSelection()}
+                      </select>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleDialogClose} color="primary">
+                      保存
+                    </Button>
+                    <Button
+                      onClick={handleDialogCancelClose}
+                      color="primary"
+                      autoFocus
+                    >
+                      閉じる
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+            </Grid>
+          </Grid>
         </div>
-      </div>
-
-      {/* 天気 */}
-      {writeWeather()}
-      
+        {/* 天気 */}
+        {writeWeather()}
+      </Grid>
     </div>
   );
 }
