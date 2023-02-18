@@ -243,7 +243,6 @@ function Weather() {
             </Grid>
           </Grid>
         </div>
-
         {/* 天気 */}
         {writeWeather()}
       </Grid>
