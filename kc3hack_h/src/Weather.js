@@ -15,6 +15,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Box,
 } from "@mui/material";
 
 reportWebVitals();
@@ -124,8 +125,12 @@ function Weather() {
                 weatherCodes[weather_id][0]
             );
           }
-          setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max + "℃");
-          setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min + "℃");
+          setWeatherTemperatureMax(
+            weather_info[1].tempAverage.areas[0].max + "℃"
+          );
+          setWeatherTemperatureMin(
+            weather_info[1].tempAverage.areas[0].min + "℃"
+          );
         });
 
       weather_api_url =
@@ -159,14 +164,25 @@ function Weather() {
               title="weather-icon"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                fontWeight="bold"
+                align="center"
+              >
                 {weather}
               </Typography>
+              <Box fontWeight="fontWeightMedium">
+                <Typography style={{ color: "#ba000d" }}>
+                  最高気温：{weather_temperature_max}
+                  <br></br>
+                </Typography>
+                <Typography color="primary">
+                  最低気温：{weather_temperature_min}
+                </Typography>
+              </Box>
               <Typography variant="body2" color="text.secondary">
-                最高気温：{weather_temperature_max}
-                <br></br>
-                最低気温：{weather_temperature_min}
-                <br></br>
                 詳細情報：{weather_description}
               </Typography>
             </CardContent>
