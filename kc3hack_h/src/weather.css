@@ -1,0 +1,14 @@
+#location-setting-dialog {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+}
+#location-setting-dialog[open] {
+  display: grid;
+  place-items: center;
+}
+#location-setting-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.204)
+}
