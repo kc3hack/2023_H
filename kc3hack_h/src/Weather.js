@@ -101,6 +101,12 @@ function Weather() {
 
     if (localStorage.getItem("LocationName") !== null) {
       area_code = nameToCodeFromLocation(localStorage.getItem("LocationName"));
+    } else {
+      return (
+        <Typography variant="h5">
+            地域が設定されていません。設定を行ってください。
+          </Typography>
+      );
     }
 
     if (area_code !== "000000") {
@@ -130,7 +136,9 @@ function Weather() {
     } else {
       return (
         <div>
-          <p>地域が設定されていませされていません。</p>
+          <Typography variant="h4">
+            地域が設定されていません
+          </Typography>
         </div>
       );
     }
@@ -157,9 +165,7 @@ function Weather() {
       <div id="location">
         <Grid container>
           <Grid item xs={5}>
-            <Typography id="location-name" variant="h4">
-              地域が設定されていません
-            </Typography>
+            <Typography id="location-name" variant="h4"></Typography>
           </Grid>
           <Grid item xs={2}>
             <div id="location-setting">
