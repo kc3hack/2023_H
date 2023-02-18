@@ -10,6 +10,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grid,
+  Typography,
 } from "@mui/material";
 
 reportWebVitals();
@@ -176,34 +178,47 @@ function Weather() {
       <h1>天気画面</h1>
 
       <div id="location">
-        <h2 id="location-name">地域が設定されていません</h2>
-        <div id="location-setting">
-          <Button variant="outlined" onClick={handleDialogOpen}>
-            地域の設定
-          </Button>
-          <Dialog
-            open={dialog_open}
-            onClose={handleDialogClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"地域の設定"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                <select id="location-select">{writeLocationSelection()}</select>
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleDialogClose} color="primary">
-                保存
+        <Grid container>
+          <Grid item xs={3}>
+            <Typography id="location-name" variant="h4">地域が設定されていません</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <div id="location-setting">
+              <Button variant="outlined" onClick={handleDialogOpen}>
+                ✐
               </Button>
-              <Button onClick={handleDialogCancelClose} color="primary" autoFocus>
-                閉じる
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-        </div>
+              <Dialog
+                open={dialog_open}
+                onClose={handleDialogClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"地域の設定"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    <select id="location-select">
+                      {writeLocationSelection()}
+                    </select>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleDialogClose} color="primary">
+                    保存
+                  </Button>
+                  <Button
+                    onClick={handleDialogCancelClose}
+                    color="primary"
+                    autoFocus
+                  >
+                    閉じる
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          </Grid>
+        </Grid>
       </div>
 
       {/* 天気 */}
