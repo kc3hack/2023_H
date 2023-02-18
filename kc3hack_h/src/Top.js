@@ -8,20 +8,15 @@ import { useNavigate } from "react-router-dom";
 reportWebVitals();
 
 
-function Top(){
-  const navigate = useNavigate()
-    
-      return(
-          <>
-          <div>
-            トップ画面
-            <Weather/>
-            <button onClick={() => {navigate('/traffic')
-      }}>遅延情報</button>
-          </div>
-          </>
-        )
-    
-  }
 
-  export default Top; 
+  return (
+    <>
+      <div>
+        トップ画面
+      </div>
+    </>
+  )
+
+}
+
+export default Top; 
