@@ -13,6 +13,7 @@ function Top() {
 
   return (
     <>
+
       <div>
         <Weather />
         <Grid
@@ -46,6 +47,7 @@ function Top() {
         </Grid>
         <ScheduleTime />
       </div>
+
     </>
   );
 }

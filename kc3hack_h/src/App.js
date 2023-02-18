@@ -19,12 +19,19 @@ function App() {
     return(
       <BrowserRouter>
         <Routes>
+          <Route path={`${process.env.PUBLIC_URL}/`} element={<Top />}/>
+          <Route path={`${process.env.PUBLIC_URL}/weather`} element={<Weather />}/>
+          <Route path={`${process.env.PUBLIC_URL}/traffic`} element={<Traffic />}/>
+          <Route path={`${process.env.PUBLIC_URL}/scheduleTime`} element={<ScheduleTime />}/>
+          <Route path={`${process.env.PUBLIC_URL}/schedule`} element={<Schedule calendarID={calendarID} APIkey={APIkey} />}/>
+          {/*
           <Route exact path="/" element={<Top />} />
           <Route  path="/weather" element={<Weather />} />
           <Route  path="/traffic" element={<Traffic />} />
           <Route  path="/time" element={<Time />} />
           <Route  path="/scheduletime" element={<ScheduleTime />} />
           <Route  path="/schedule" element={<Schedule calendarID={calendarID} APIkey={APIkey} />} />
+        */}
         </Routes>
       </BrowserRouter>
     );
