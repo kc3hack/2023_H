@@ -10,6 +10,7 @@ import Event2 from './img/EV3.png'
 import Event3 from './img/EV4.png'
 import BackgroundInfo from './img/BG_info.png'
 import { useNavigate } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
 
 reportWebVitals();
 
@@ -111,7 +112,7 @@ function Schedule (props) {
 
   //グーグルカレンダーから読み取って処理する
   useEffect( () => {
-    fetch(`https://www.googleapis.com/calendar/v3/calendars/${props.calendarID}/events?timeMin=2023-02-11T00:00:00Z&key=${this.props.APIkey}`)
+    fetch(`https://www.googleapis.com/calendar/v3/calendars/${props.calendarID}/events?timeMin=2023-02-11T00:00:00Z&key=${props.APIkey}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -126,7 +127,7 @@ function Schedule (props) {
         }));
         simpevents.sort((a, b) => a.start - b.start);
         simpevents = simpevents.filter(events => events.end > Date.now());
-       setSimpevents({ simpevents: simpevents });
+       setSimpevents(simpevents );
       })
       .catch(error => console.error(error));
   },[])
@@ -138,8 +139,15 @@ function Schedule (props) {
     const navigate = useNavigate()
     return (
       <>
-       <button className="scheduleReturnButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/`)
-}}>戻る</button>
+       <Button
+            className="scheduleReturnButton"
+            onClick={() => {
+              navigate(`${process.env.PUBLIC_URL}/`);
+            }}
+            variant="outlined"
+          >
+            戻る
+            </Button>
          <div className="container_Schedule" style={{ position: "relative" }}>
            <img src={Background1} alt="Background1" className="background_Schedule" />
            <img src={Running} alt="Running" className="Running_Schedule" />

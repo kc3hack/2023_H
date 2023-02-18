@@ -1,0 +1,50 @@
+@charset "UTF-8";
+*{box-sizing: border-box;}
+
+/*
+media screen and (min-width:800px){
+  container{flex-direction: row;
+  }
+  main{
+    flex: 11auto;
+  }
+  aside{
+    flex:00 240px;
+  }
+}
+*/
+
+iframe {
+    border:none;
+    width:100%;
+    border-bottom: 4px solid #000000;
+    border-right: 3px solid #000000;
+    border-left: 3px solid #000000;
+}
+
+h1{
+    background-color:darkgreen;
+    font-size:15px;
+    color: white;
+}
+header{
+    background-color:rgb(81, 161, 0);
+    font-size:13px;
+    margin:0px;
+}
+body{
+    background-color: antiquewhite;
+}
+main{
+    background-color:burlywood;
+}
+h2{
+  font-family: serif;
+  border-top: 4px solid #000000;
+  border-left:3px solid #000000;
+  border-right: 3px solid #000000;
+  padding-left:6px;
+}
+a{
+  font-size: 30px;
+}
