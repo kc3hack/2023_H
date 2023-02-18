@@ -18,13 +18,13 @@ function Top(){
   return(
     <>
     <div>
-      トップ画面
+      
       
       <Weather/>
-      <button className="trafficButton" onClick={() => {navigate('/traffic')
+      <button className="trafficButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/traffic`)
 }}>遅延情報</button>
       <br/>
-      <button className="scheduleButton" onClick={() => {navigate('/schedule')
+      <button className="scheduleButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/schedule`)
 }}>予定情報</button>
       {/*<Schedule calendarID={calendarID} APIkey={APIkey}/>*/}
       <ScheduleTime />

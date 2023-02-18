@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import './index.css';
 import './Schedule.css';
 import reportWebVitals from './reportWebVitals';
@@ -9,6 +9,7 @@ import Event1 from './img/EV2.png'
 import Event2 from './img/EV3.png'
 import Event3 from './img/EV4.png'
 import BackgroundInfo from './img/BG_info.png'
+import { useNavigate } from "react-router-dom";
 
 reportWebVitals();
 
@@ -94,17 +95,23 @@ function EventButtons(props) {
   );
 }
 
-class Schedule extends React.Component {
+function Schedule (props) {
   //簡単化した情報をstateに保存
+  
+  /*
   constructor(props) {
     super(props);
     this.state = {
       simpevents: []
     };
   }
+  */
+
+ const [simpevents,setSimpevents] = useState([]);
+
   //グーグルカレンダーから読み取って処理する
-  componentDidMount() {
-    fetch(`https://www.googleapis.com/calendar/v3/calendars/${this.props.calendarID}/events?timeMin=2023-02-11T00:00:00Z&key=${this.props.APIkey}`)
+  useEffect( () => {
+    fetch(`https://www.googleapis.com/calendar/v3/calendars/${props.calendarID}/events?timeMin=2023-02-11T00:00:00Z&key=${this.props.APIkey}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -119,22 +126,27 @@ class Schedule extends React.Component {
         }));
         simpevents.sort((a, b) => a.start - b.start);
         simpevents = simpevents.filter(events => events.end > Date.now());
-        this.setState({ simpevents: simpevents });
+       setSimpevents({ simpevents: simpevents });
       })
       .catch(error => console.error(error));
-  }
+  },[])
 
-  render() {
-    console.log(this.state.simpevents);
+  
+
+  
+    console.log(simpevents);
+    const navigate = useNavigate()
     return (
       <>
+       <button className="scheduleReturnButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/`)
+}}>戻る</button>
          <div className="container_Schedule" style={{ position: "relative" }}>
            <img src={Background1} alt="Background1" className="background_Schedule" />
            <img src={Running} alt="Running" className="Running_Schedule" />
-           <EventButtons simpevents={this.state.simpevents} />
+           <EventButtons simpevents={simpevents} />
          </div>
        </>
     );
-  }
+  
 }
 export default Schedule; 

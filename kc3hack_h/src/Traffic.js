@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { useNavigate } from "react-router-dom";
 
 
 reportWebVitals();
@@ -8,9 +9,11 @@ reportWebVitals();
 
 function Traffic(){
 
-  
+  const navigate = useNavigate()
     return(
         <>
+         <button className="trafficReturnButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/`)
+}}>戻る</button>
         <h2>JR西日本</h2>
       <iframe src="https://trafficinfo.westjr.co.jp/kinki_history.html" width="1000" height="500" ></iframe>
     <h2>阪神電車</h2>
