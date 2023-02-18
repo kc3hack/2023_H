@@ -15,6 +15,7 @@ function Top() {
     <>
 
       <div>
+        <ScheduleTime />
         <Weather />
         <Grid
           container
@@ -22,17 +23,6 @@ function Top() {
           justifyContent="center"
           direction="column"
         >
-          <Button
-            className="trafficButton"
-            onClick={() => {
-              navigate(`${process.env.PUBLIC_URL}/traffic`);
-            }}
-            variant="outlined"
-            size="large"
-          >
-            遅延情報
-          </Button>
-          <br />
           <Button
             className="scheduleButton"
             onClick={() => {
@@ -43,9 +33,19 @@ function Top() {
           >
             予定情報
           </Button>
+          <br />
+          <Button
+            className="trafficButton"
+            onClick={() => {
+              navigate(`${process.env.PUBLIC_URL}/traffic`);
+            }}
+            variant="outlined"
+            size="large"
+          >
+            遅延情報
+          </Button>
           {/*<Schedule calendarID={calendarID} APIkey={APIkey}/>*/}
         </Grid>
-        <ScheduleTime />
       </div>
 
     </>
