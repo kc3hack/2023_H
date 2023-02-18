@@ -2,12 +2,8 @@ import React from "react";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Weather from "./Weather";
-import Schedule from "./Schedule";
 import ScheduleTime from "./ScheduleTime";
 import { useNavigate } from "react-router-dom";
-
-const calendarID = "282696404qq@gmail.com";
-const APIkey = "AIzaSyB211YGz4rfmjrJIcf_9r036GvUsVqegtM";
 
 reportWebVitals();
 
