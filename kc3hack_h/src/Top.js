@@ -1,37 +1,55 @@
-import React from 'react';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import Weather from './Weather';
-import Schedule from './Schedule';
-import ScheduleTime from './ScheduleTime';
+import React from "react";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import Weather from "./Weather";
+import ScheduleTime from "./ScheduleTime";
 import { useNavigate } from "react-router-dom";
-
-const calendarID = '282696404qq@gmail.com';
-const APIkey = 'AIzaSyB211YGz4rfmjrJIcf_9r036GvUsVqegtM';
-
+import { Button, Grid } from "@mui/material";
 
 reportWebVitals();
 
-function Top(){
-  const navigate = useNavigate()
+function Top() {
+  const navigate = useNavigate();
 
-  return(
+  return (
     <>
-    <div>
-      
-      
-      <Weather/>
-      <button className="trafficButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/traffic`)
-}}>遅延情報</button>
-      <br/>
-      <button className="scheduleButton" onClick={() => {navigate(`${process.env.PUBLIC_URL}/schedule`)
-}}>予定情報</button>
-      {/*<Schedule calendarID={calendarID} APIkey={APIkey}/>*/}
-      <ScheduleTime />
-    </div>
-    </>
-  )
 
+      <div>
+        <Weather />
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+        >
+          <Button
+            className="trafficButton"
+            onClick={() => {
+              navigate("/traffic");
+            }}
+            variant="outlined"
+            size="large"
+          >
+            遅延情報
+          </Button>
+          <br />
+          <Button
+            className="scheduleButton"
+            onClick={() => {
+              navigate("/schedule");
+            }}
+            variant="outlined"
+            size="large"
+          >
+            予定情報
+          </Button>
+          {/*<Schedule calendarID={calendarID} APIkey={APIkey}/>*/}
+        </Grid>
+        <ScheduleTime />
+      </div>
+
+    </>
+  );
 }
 
-export default Top; 
+export default Top;
