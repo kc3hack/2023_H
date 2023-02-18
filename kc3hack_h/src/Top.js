@@ -25,7 +25,7 @@ function Top() {
           <Button
             className="trafficButton"
             onClick={() => {
-              navigate("/traffic");
+              navigate(`${process.env.PUBLIC_URL}/traffic`);
             }}
             variant="outlined"
             size="large"
@@ -36,7 +36,7 @@ function Top() {
           <Button
             className="scheduleButton"
             onClick={() => {
-              navigate("/schedule");
+              navigate(`${process.env.PUBLIC_URL}/schedule`);
             }}
             variant="outlined"
             size="large"
