@@ -162,52 +162,59 @@ function Weather() {
 
   return (
     <div id="feature-weather">
-      <div id="location">
-        <Grid container>
-          <Grid item xs={5}>
-            <Typography id="location-name" variant="h4"></Typography>
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+      >
+        <div id="location">
+          <Grid container>
+            <Grid item xs={10}>
+              <Typography id="location-name" variant="h4"></Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <div id="location-setting">
+                <Button variant="outlined" onClick={handleDialogOpen}>
+                  ✐
+                </Button>
+                <Dialog
+                  open={dialog_open}
+                  onClose={handleDialogClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"地域の設定"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      <select id="location-select">
+                        {writeLocationSelection()}
+                      </select>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleDialogClose} color="primary">
+                      保存
+                    </Button>
+                    <Button
+                      onClick={handleDialogCancelClose}
+                      color="primary"
+                      autoFocus
+                    >
+                      閉じる
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={2}>
-            <div id="location-setting">
-              <Button variant="outlined" onClick={handleDialogOpen}>
-                ✐
-              </Button>
-              <Dialog
-                open={dialog_open}
-                onClose={handleDialogClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"地域の設定"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    <select id="location-select">
-                      {writeLocationSelection()}
-                    </select>
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleDialogClose} color="primary">
-                    保存
-                  </Button>
-                  <Button
-                    onClick={handleDialogCancelClose}
-                    color="primary"
-                    autoFocus
-                  >
-                    閉じる
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
+        </div>
 
-      {/* 天気 */}
-      {writeWeather()}
+        {/* 天気 */}
+        {writeWeather()}
+      </Grid>
     </div>
   );
 }
