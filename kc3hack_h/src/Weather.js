@@ -19,7 +19,6 @@ reportWebVitals();
 // TODO: 地域の設定は地域コードを使用するように
 
 function Weather() {
-  let dialog = document.getElementById("location-setting-dialog");
   const [weather, setWeather] = useState("");
   const [weather_id, setWeatherId] = useState("");
   const [weather_icon_url, setWeatherIconUrl] = useState("");
