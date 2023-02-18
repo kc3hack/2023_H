@@ -124,8 +124,8 @@ function Weather() {
                 weatherCodes[weather_id][0]
             );
           }
-          setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max);
-          setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min);
+          setWeatherTemperatureMax(weather_info[1].tempAverage.areas[0].max + "℃");
+          setWeatherTemperatureMin(weather_info[1].tempAverage.areas[0].min + "℃");
         });
 
       weather_api_url =
