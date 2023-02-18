@@ -127,11 +127,13 @@ class Schedule extends React.Component {
   render() {
     console.log(this.state.simpevents);
     return (
-      <div className="container">
-        <img src={Background1} alt="Background1" className="background" />
-        <img src={Running} alt="Running" className="Running" />
-        <EventButtons simpevents={this.state.simpevents} />
-      </div>
+      <>
+        <div className="container" style={{ position: "relative" }}>
+          <img src={Background1} alt="Background1" className="background" />
+          <img src={Running} alt="Running" className="Running" />
+          <EventButtons simpevents={this.state.simpevents} />
+        </div>
+      </>
     );
   }
 }
