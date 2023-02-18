@@ -5,7 +5,7 @@ import Top from './Top';
 import Weather from './Weather';
 import Traffic from './Traffic';
 import Time from './Time';
-import Schedule from './Schedule';
+import ScheduleTime from './ScheduleTime';
 
 
 
@@ -21,7 +21,7 @@ function App () {
           <Route  path="/weather" element={<Weather />} />
           <Route  path="/traffic" element={<Traffic />} />
           <Route  path="/time" element={<Time />} />
-          <Route  path="/schedule" element={<Schedule />} />
+          <Route  path="/scheduletime" element={<ScheduleTime />} />
         </Routes>
       </BrowserRouter>
     );
