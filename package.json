@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "css-loader": "^6.7.3",
+    "tailwindcss": "^3.2.7"
+  }
+}
