@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import Schedule from './Schedule';
+
+const calendarID = '282696404qq@gmail.com';
+const APIkey = 'AIzaSyB211YGz4rfmjrJIcf_9r036GvUsVqegtM';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Schedule calendarID={calendarID} APIkey={APIkey} />
   </React.StrictMode>
 );
 
