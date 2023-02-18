@@ -3,8 +3,14 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import weatherCodes from "./weatherCodes.json";
 import LocationCodes from "./location.json";
-import "./weather.css";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 reportWebVitals();
 
@@ -20,6 +26,29 @@ function Weather() {
   const [weather_description, setWeatherDescription] = useState(
     "天気情報を取得できていない可能性があります。"
   );
+  const [dialog_open, setDialogOpen] = useState(false);
+
+  // Dialogの表示
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  // Dialogの非表示
+  const handleDialogClose = () => {
+    let select = document.getElementById("location-select");
+    let selected_option = select.options[select.selectedIndex];
+    let selected_value = selected_option.value;
+    document.getElementById("location-name").textContent = selected_value;
+    localStorage.setItem(
+      "LocationName",
+      document.getElementById("location-name").textContent
+    );
+    window.location.reload();
+    setDialogOpen(false);
+  };
+  const handleDialogCancelClose = () => {
+    setDialogOpen(false);
+  };
 
   // ここから地点の設定
   // ローカルストレージに保存されている地点名を取得しある場合は表示
@@ -118,7 +147,7 @@ function Weather() {
           setWeatherDescription(weather_description["text"]);
         });
     } else {
-      return(
+      return (
         <div>
           <p>地域が設定されていませされていません。</p>
         </div>
@@ -149,24 +178,31 @@ function Weather() {
       <div id="location">
         <h2 id="location-name">地域が設定されていません</h2>
         <div id="location-setting">
-          <dialog id="location-setting-dialog">
-            <p>地域を設定</p>
-            <select id="location-select">{writeLocationSelection()}</select>
-            <Button
-              onClick={handleLocationSettingCloseClick}
-              variant="contained"
-              
-            >
-              閉じる
-            </Button>
-          </dialog>
-          <Button
-            id="location-setting-button"
-            onClick={handleLocationSettingClick}
-            variant="outlined"
-          >
-            ✐
+          <Button variant="outlined" onClick={handleDialogOpen}>
+            地域の設定
           </Button>
+          <Dialog
+            open={dialog_open}
+            onClose={handleDialogClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"地域の設定"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                <select id="location-select">{writeLocationSelection()}</select>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDialogClose} color="primary">
+                保存
+              </Button>
+              <Button onClick={handleDialogCancelClose} color="primary" autoFocus>
+                閉じる
+              </Button>
+            </DialogActions>
+          </Dialog>
+
         </div>
       </div>
 
