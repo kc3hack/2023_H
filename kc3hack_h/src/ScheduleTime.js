@@ -93,8 +93,8 @@ function ScheduleTime() {
 
   return (
     // one seconds later, get events
-    setTimeout(getEvents, 1000),
-    <div className="App" style={{ position: "relative" }}>
+    setTimeout(getEvents, 2000),
+    <div className="App">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body m-2">
           <div id="clock" className="text-6xl p-3"></div>
