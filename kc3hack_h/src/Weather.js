@@ -153,9 +153,7 @@ function Weather() {
   }
 
   return (
-    <div>
-      <h1>天気画面</h1>
-
+    <div id="feature-weather">
       <div id="location">
         <Grid container>
           <Grid item xs={5}>
