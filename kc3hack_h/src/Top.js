@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Weather from './Weather';
 
 
 reportWebVitals();
@@ -12,6 +13,7 @@ function Top(){
           <>
           <div>
             トップ画面
+            <Weather/>
           </div>
           </>
         )

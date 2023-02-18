@@ -120,7 +120,7 @@ function Weather() {
     } else {
       return(
         <div>
-          <p>地域が設定されていませされていません。</p>
+          <p>地域が設定されていません。</p>
         </div>
       );
     }
@@ -172,6 +172,7 @@ function Weather() {
 
       {/* 天気 */}
       {writeWeather()}
+      
     </div>
   );
 }
