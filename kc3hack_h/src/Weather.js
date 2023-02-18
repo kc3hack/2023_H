@@ -12,6 +12,9 @@ import {
   DialogTitle,
   Grid,
   Typography,
+  Card,
+  CardContent,
+  CardMedia,
 } from "@mui/material";
 
 reportWebVitals();
@@ -104,8 +107,8 @@ function Weather() {
     } else {
       return (
         <Typography variant="h5">
-            地域が設定されていません。設定を行ってください。
-          </Typography>
+          地域が設定されていません。設定を行ってください。
+        </Typography>
       );
     }
 
@@ -136,26 +139,39 @@ function Weather() {
     } else {
       return (
         <div>
-          <Typography variant="h4">
-            地域が設定されていません
-          </Typography>
+          <Typography variant="h4">地域が設定されていません</Typography>
         </div>
       );
     }
 
     return (
       <div id="weather">
-        <div id="weather-icon">
-          <img src={weather_icon_url} alt="weather-icon" />
-        </div>
-        <div id="weather-temperature-max">
-          最高気温：{weather_temperature_max}
-        </div>
-        <div id="weather-temperature-min">
-          最低気温：{weather_temperature_min}
-        </div>
-
-        <div id="weather-description">詳細情報：{weather_description}</div>
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+        >
+          <Card sx={{ maxWidth: 500 }}>
+            <CardMedia
+              sx={{ height: 300 }}
+              image={weather_icon_url}
+              title="weather-icon"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {weather}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                最高気温：{weather_temperature_max}
+                <br></br>
+                最低気温：{weather_temperature_min}
+                <br></br>
+                詳細情報：{weather_description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </div>
     );
   }
