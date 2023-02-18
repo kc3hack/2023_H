@@ -1,10 +1,7 @@
 import React from 'react';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ApiCalendar from "react-google-calendar-api";
 import './scheduletime.css';
-
-
 
 
 reportWebVitals();
@@ -98,19 +95,18 @@ function ScheduleTime() {
     // one seconds later, get events
     setTimeout(getEvents, 1000),
     <div className="App">
-      <div className="card bg-base-100 shadow-xl ">
-        <div className="card-body">
-          {/* show current clock show big */}
+      <div className="card bg-base-100 shadow-xl">
+        <div className="card-body m-2">
           <div id="clock" className="text-6xl p-3"></div>
           <div className="grid grid-cols-6 md:grid-cols-11">
             {/* show next event */}
-            <div className="col-span-7 md:col-span-4 bg-yellow-200 rounded-lg p-4 md:p-4 md:mr-2 ">
+            <div className="col-span-7 md:col-span-4 bg-yellow-200 rounded-lg p-4 md:p-4 md:mr-2 mb-2">
               <div className="text-2xl">あと</div>
               <div id="minutes" className="text-6xl"></div>
               <div className="text-2xl">分</div>
             </div>
             {/* show events */}
-            <div className="col-span-7 bg-blue-100 rounded-lg p-3">
+            <div className="col-span-7 bg-blue-100 rounded-lg p-3 mb-2">
               <div id="events" onEnded={getEvents}></div>
             </div>
           </div>
