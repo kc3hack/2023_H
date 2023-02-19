@@ -17,6 +17,7 @@ import {
   CardMedia,
   Box,
 } from "@mui/material";
+import UmbrellaImage from "./img/umbrella.png";
 
 reportWebVitals();
 
@@ -95,6 +96,38 @@ function Weather() {
       }
     }
     return "000000";
+  }
+
+  // 傘が必要かどうかを判断する
+  function needUmbrella(params) {
+    if (params !== "") {
+      let str = weatherCodes[params][3];
+      if (str.indexOf("雨") !== -1 || str.indexOf("雪") !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  function umbrella() {
+    if (needUmbrella(weather_id)) {
+      return (
+        <>
+          <img
+            src={UmbrellaImage}
+            alt="umbrella"
+            className="umbrella-image"
+            style={{ width: "30%" }}
+          />
+          <Typography variant="h5" color={"orange"}>
+            傘が必要です！
+          </Typography>
+        </>
+      );
+    } else {
+      return <br />;
+    }
   }
 
   // 天気情報の書き込み(変数に値を代入しHTMLで出力)
@@ -244,6 +277,7 @@ function Weather() {
           </Grid>
         </div>
         {/* 天気 */}
+        {umbrella()}
         {writeWeather()}
       </Grid>
     </div>
