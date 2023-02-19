@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import './Schedule.css';
 import reportWebVitals from './reportWebVitals';
@@ -10,9 +10,10 @@ import Event2 from './img/EV3.png'
 import Event3 from './img/EV4.png'
 import BackgroundInfo from './img/BG_info.png'
 import { useNavigate } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
+import { Button } from "@mui/material";
 
 reportWebVitals();
+
 
 //UNIX時間を文字列にする関数(開始時刻～終了時刻)
 function formatDateTimeRange(startTimestamp, endTimestamp, onlyDate = false) {
@@ -73,7 +74,7 @@ function Icon({ simpevents, eventID }) {
           <button onClick={handleDetailsClose} className={"backbutton"}>{"＜"}</button>
           <span >{"🗓️" + formatDateTimeRange(simpevents.start, simpevents.end, simpevents.allday)}</span>
           <p className={"remaintime"}>{"⏱️" + getTimeRemaining(simpevents.start)}</p>
-          <h2>{simpevents.summary}</h2>
+          <h3>{simpevents.summary}</h3>
           <h3>{simpevents.description}</h3>
           <h4>{(simpevents.location && "📍") + simpevents.location.split(",")[0]}</h4>
         </span>
@@ -96,9 +97,11 @@ function EventButtons(props) {
   );
 }
 
-function Schedule (props) {
+
+
+function Schedule(props) {
   //簡単化した情報をstateに保存
-  
+
   /*
   constructor(props) {
     super(props);
@@ -107,11 +110,25 @@ function Schedule (props) {
     };
   }
   */
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
- const [simpevents,setSimpevents] = useState([]);
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const scale = windowWidth / 500;
+  const transform = `scale(${scale})`;
+
+
+  const [simpevents, setSimpevents] = useState([]);
 
   //グーグルカレンダーから読み取って処理する
-  useEffect( () => {
+  useEffect(() => {
     fetch(`https://www.googleapis.com/calendar/v3/calendars/${props.calendarID}/events?timeMin=2023-02-11T00:00:00Z&key=${props.APIkey}`)
       .then(response => response.json())
       .then(data => {
@@ -127,19 +144,21 @@ function Schedule (props) {
         }));
         simpevents.sort((a, b) => a.start - b.start);
         simpevents = simpevents.filter(events => events.end > Date.now());
-       setSimpevents(simpevents );
+        setSimpevents(simpevents);
       })
       .catch(error => console.error(error));
-  },[])
+  }, [])
 
-  
 
-  
-    console.log(simpevents);
-    const navigate = useNavigate()
-    return (
-      <>
-       <Button
+
+
+  console.log(simpevents);
+  const navigate = useNavigate()
+  return (
+    <>
+      <div style={{ transform: transform, transformOrigin: "top left" }}>
+        <div className="container_Schedule">
+          <Button
             className="scheduleReturnButton"
             onClick={() => {
               navigate(`${process.env.PUBLIC_URL}/`);
@@ -147,14 +166,21 @@ function Schedule (props) {
             variant="outlined"
           >
             戻る
-            </Button>
-         <div className="container_Schedule" style={{ position: "relative" }}>
-           <img src={Background1} alt="Background1" className="background_Schedule" />
-           <img src={Running} alt="Running" className="Running_Schedule" />
-           <EventButtons simpevents={simpevents} />
-         </div>
-       </>
-    );
-  
+          </Button>
+          <div className="container_Schedulea"/* style={{ position: "relative" }}*/>
+            <img src={Background1} alt="Background1" className="background_Schedule" />
+            <img src={Running} alt="Running" className="Running_Schedule" />
+            <EventButtons simpevents={simpevents} />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
 }
-export default Schedule; 
+export default Schedule;
+
+
+
+
+
