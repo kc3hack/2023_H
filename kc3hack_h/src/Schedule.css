@@ -1,6 +1,9 @@
-/* body {
+.container_Schedule {
+
     font-family: "UD デジタル 教科書体 NP-B", "メイリオ";
-} */
+    position: relative;
+    width: 500px;
+}
 
 .background_Schedule {
     position: absolute;
@@ -32,27 +35,30 @@
 
 .button_Schedule0 {
     position: absolute;
-    left: 140px;
+    left: 100px;
     top: 60px;
     border: 0;
     background-color: transparent;
-
+    width: 100px;
 }
 
 .button_Schedule1 {
     position: absolute;
-    left: 220px;
+    left: 160px;
     top: 139px;
     border: 0;
     background-color: transparent;
+    width: 130px;
+
 }
 
 .button_Schedule2 {
     position: absolute;
-    left: 320px;
+    left: 280px;
     top: 40px;
     border: 0;
     background-color: transparent;
+    width: 120px;
 }
 
 .button_Schedule3 {
@@ -65,16 +71,16 @@
 
 .event_Schedule0 {
     position: absolute;
-    left: -20px;
+    left: 0px;
     top: -28px;
-    width: 100px;
+    width: 200px;
     height: 160px;
     z-index: -100;
 }
 
 .event_Schedule1 {
     position: absolute;
-    left: -20px;
+    left: 5px;
     top: -26px;
     width: 120px;
     height: 90px;
@@ -83,7 +89,7 @@
 
 .event_Schedule2 {
     position: absolute;
-    left: -15px;
+    left: 0px;
     top: -27px;
     width: 120px;
     height: 80px;
@@ -111,12 +117,12 @@
     line-height: 1.5em;
 }
 
-button {
-    font-family: "UD デジタル 教科書体 NP-B", "メイリオ";
-    font-size: 16px;
-}
+
 
 .backbutton {
+    font-family: "UD デジタル 教科書体 NP-B", "メイリオ";
+    font-size: 16px;
+
     position: absolute;
     left: 0px;
     border: 0;
@@ -127,6 +133,6 @@ button {
 .remaintime {
     position: absolute;
     left: auto;
-    right: 150px;
-    top: 20px;
+    right: 120px;
+    top: 40px;
 }
